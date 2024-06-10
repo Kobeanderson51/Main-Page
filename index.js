@@ -1,16 +1,18 @@
 let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
-
+    
     function showSlide(index) {
-      slides[currentSlide].classList.remove('active');
-      currentSlide = (index + slides.length) % slides.length;
-      slides[currentSlide].classList.add('active');
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
     }
-
-    function nextSlide() {
-      showSlide(currentSlide + 1);
-    }
-
+    
     function prevSlide() {
-      showSlide(currentSlide - 1);
+        currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
+        showSlide(currentSlide);
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
+        showSlide(currentSlide);
     }
